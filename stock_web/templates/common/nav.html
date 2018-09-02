@@ -1,0 +1,33 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="./">Stock WEB</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+            <ul class="navbar-nav mr-auto">
+                {% if not session.logged_in %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">ログイン</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/company_info">会社情報</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">チャート</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">業績</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">時系列</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-right" href="/logout">ログアウト</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>

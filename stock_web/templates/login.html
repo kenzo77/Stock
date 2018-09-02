@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Stock WEB</title>
+        {% include 'common/header.html' %}
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="./">Stock WEB</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="alert alert-info" role="alert">
+                        {% for message in messages %}
+                            {{ message }}
+                            <br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            <div class="blog-body mt-3">
+                <form action="/login" method="post">
+                    <div class="form-group">
+                        <label for="InputTitle">ユーザ名</label>
+                        <input type="text" class="form-control col-3" id="InputTitle" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="InputPassword">パスワード</label>
+                        <input type="password" class="form-control col-3" id="InputPassword" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">ログイン</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
