@@ -1,7 +1,7 @@
 from pathlib import Path
 
 
-sqlite_path = 'sqlite:///{0}'.format(Path("D:\workspace\stock\stock\stock_web\stock.db"))
+sqlite_path = 'sqlite:///{0}'.format(Path("D:\workspace\stock\stock\stock.db"))
 DEBUG = True
 SECRET_KEY = 'secret key'
 SQLALCHEMY_DATABASE_URI = sqlite_path

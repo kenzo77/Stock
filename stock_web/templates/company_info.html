@@ -153,5 +153,22 @@
                 </div>
             </section>
         </div>
+
     {% endblock %}
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- .appendでdataの個数分のDOM要素をHTMLに動的に挿入することができる -->
+    <script>
+        var p = d3.select("body")
+          .selectAll('p')
+          .data([4,8,15,16,23,42])
+            .text(function(d) { return d; });
+
+        // Enter
+        p.enter().append("p")
+          .text(function(d) { return d;});
+
+        // Exit
+        p.exit().remove()
+
+    </script>
 </html>
