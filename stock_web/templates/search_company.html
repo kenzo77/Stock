@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+        <title>会社情報</title>
+        {% include 'common/header.html' %}
+    </head>
+    {% block body %}
+        {% include 'common/nav.html' %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                        <br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <div class="container-fluid mt-3">
+            <section class="section section-default search_condition">
+                <form action="{{ url_for('search_company') }}" method="post">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="col-sm-2">銘柄コード</div>
+                            <div class="col-sm-2"><input type="text" id="symbol" /></div>
+                            <div class="col-sm-2">銘柄名</div>
+                            <div class="col-sm-2"><input type="text" id="symbol_name" /></div>
+                            <div class="col-sm-2">キーワード</div>
+                            <div class="col-sm-2"><input type="text" id="keyword" /></div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <button type="submit" class="btn btn-secondary ml-2">検　索</button>
+                    </div>
+                </form>
+            </section>
+            <section class="section section-default search_result">
+                {% if company_list is defined %}
+                    <table class="table table-hover mt-3">
+                        <tr>
+                            <th>銘柄</th><th>銘柄名</th><th>上場場所</th><th>上場日</th><th>業種</th><th>特徴</th>
+                        </tr>
+                        {% for company in company_list %}
+                            <tr>
+                                <td>{{company['STOCK_CODE']}}</td>
+                                <td><a href="/search_symbol?symbol={{company['STOCK_CODE']}}">{{company['STOCK_NAME']}}</a></td>
+                                <td>{{company['LISTED_PLACE']}}</td>
+                                <td>{{company['LIESTED_DATE']}}</td>
+                                <td>{{company['BUSINESS_TYPE_NAME']}}</td>
+                                <td>{{company['CHARACTERISTIC']}}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+            </section>
+        </div>
+    {% endblock %}
+
+</html>

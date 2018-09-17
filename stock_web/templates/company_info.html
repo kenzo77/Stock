@@ -153,26 +153,28 @@
                 </div>
             </section>
         </div>
-        <table class="table">
-            <tr>
-                <th>会社コード</th>
-                <th>発表期</th>
-                <th>売上高</th>
-                <th>営業利益</th>
-                <th>経常利益</th>
-                <th>純利益</th>
-            </tr>
-        {% for company in company_info %}
-            <tr>
-                <td>{{company['STOCK_CODE']}}</td>
-                <td>{{company['TERM']}}</td>
-                <td>{{company['SALES']}}</td>
-                <td>{{company['OPERATING_INCOME']}}</td>
-                <td>{{company['ORDINARY_INCOME']}}</td>
-                <td>{{company['NET_INCOME']}}</td>
-            </tr>
-        {% endfor %}
-        </table>
+        {% if company_info is defined %}
+            <table class="table">
+                <tr>
+                    <th>会社コード</th>
+                    <th>発表期</th>
+                    <th>売上高</th>
+                    <th>営業利益</th>
+                    <th>経常利益</th>
+                    <th>純利益</th>
+                </tr>
+            {% for company in company_info %}
+                <tr>
+                    <td>{{company['STOCK_CODE']}}</td>
+                    <td>{{company['TERM']}}</td>
+                    <td>{{company['SALES']}}</td>
+                    <td>{{company['OPERATING_INCOME']}}</td>
+                    <td>{{company['ORDINARY_INCOME']}}</td>
+                    <td>{{company['NET_INCOME']}}</td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% endif %}
     {% endblock %}
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <!-- .appendでdataの個数分のDOM要素をHTMLに動的に挿入することができる -->
