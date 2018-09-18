@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
     <head>
-        <title>会社情報</title>
+        <title>会社検索</title>
         {% include 'common/header.html' %}
     </head>
     {% block body %}
@@ -17,16 +17,27 @@
             {% endif %}
         {% endwith %}
         <div class="container-fluid mt-3">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="page-header">
+                        <h2>会社検索</h2>
+                    </div>
+                </div>
+            </div>
             <section class="section section-default search_condition">
                 <form action="{{ url_for('search_company') }}" method="post">
                     <div class="row">
-                        <div class="col-sm-8">
-                            <div class="col-sm-2">銘柄コード</div>
-                            <div class="col-sm-2"><input type="text" id="symbol" /></div>
-                            <div class="col-sm-2">銘柄名</div>
-                            <div class="col-sm-2"><input type="text" id="symbol_name" /></div>
-                            <div class="col-sm-2">キーワード</div>
-                            <div class="col-sm-2"><input type="text" id="keyword" /></div>
+                        <div class="col-sm-2">
+                            <div class="col-sm">銘柄コード</div>
+                            <div class="col-sm"><input type="text" name="symbol" value="{{val['symbol']}}" placeholder="完全一致" /></div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="col-sm">銘柄名</div>
+                            <div class="col-sm"><input type="text" name="symbol_name" value="{{val['symbol_name']}}" placeholder="部分一致" /></div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="col-sm">キーワード</div>
+                            <div class="col-sm"><input type="text" name="keyword" value="{{val['keyword']}}" placeholder="部分一致" /></div>
                         </div>
                     </div>
                     <div class="row mt-3">

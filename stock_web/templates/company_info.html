@@ -152,8 +152,9 @@
                     <div class="col-sm-11" >【重　点】部品・サービス事業の19年度売上比率５割（今期45％）計画。採算悪い100ｔ未満の鉱山用ダンプ生産を当面停止。ＩＣＴ施工のクラウド事業を９月開始へ。</div>
                 </div>
             </section>
-        </div>
+
         {% if company_info is defined %}
+            <br>
             <table class="table">
                 <tr>
                     <th>会社コード</th>
@@ -175,6 +176,7 @@
             {% endfor %}
             </table>
         {% endif %}
+        </div>
     {% endblock %}
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <!-- .appendでdataの個数分のDOM要素をHTMLに動的に挿入することができる -->

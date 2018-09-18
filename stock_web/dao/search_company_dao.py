@@ -20,5 +20,14 @@ def search_company(condition):
     base_sql += "   inner join MST_BUSINESS_TYPE c "
     base_sql += "   on b.BUSINESS_TYPE = c.BUSINESS_TYPE "
     base_sql += " where a.IS_DELETE = 0 "
-    result = db.engine.execute(base_sql)
+
+    sql = base_sql
+    if condition["symbol"] != '':
+        sql = sql + "and a.STOCK_CODE = '{0}-T' ".format(condition["symbol"])
+    if condition["symbol_name"] != '':
+        sql = sql + "and a.STOCK_NAME like '%{0}%' ".format(condition["symbol_name"])
+    if condition["keyword"] != '':
+        sql = sql + "and (a.COMPANY_PROFILE like '%{0}%' or b.CHARACTERISTIC like '%{0}%' or " \
+                     "b.COMMENTARY1 like '%{0}%' or b.COMMENTARY2 like '%{0}%') ".format(condition["keyword"])
+    result = db.engine.execute(sql)
     return common_dao.convert_json_list(result)
