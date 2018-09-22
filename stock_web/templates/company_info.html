@@ -153,45 +153,158 @@
                 </div>
             </section>
 
-        {% if company_info is defined %}
             <br>
-            <table class="table">
-                <tr>
-                    <th>会社コード</th>
-                    <th>発表期</th>
-                    <th>売上高</th>
-                    <th>営業利益</th>
-                    <th>経常利益</th>
-                    <th>純利益</th>
-                </tr>
-            {% for company in company_info %}
-                <tr>
-                    <td>{{company['STOCK_CODE']}}</td>
-                    <td>{{company['TERM']}}</td>
-                    <td>{{company['SALES']}}</td>
-                    <td>{{company['OPERATING_INCOME']}}</td>
-                    <td>{{company['ORDINARY_INCOME']}}</td>
-                    <td>{{company['NET_INCOME']}}</td>
-                </tr>
-            {% endfor %}
-            </table>
-        {% endif %}
+            <div class="row">
+                <div class="col-sm-6">
+                    <canvas id="sales_chart"></canvas>
+                </div>
+                <div class="col-sm-6">
+                    <canvas id="operating_income_chart"></canvas>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <canvas id="ordinal_income_chart"></canvas>
+                </div>
+                <div class="col-sm-6">
+                    <canvas id="net_income_chart"></canvas>
+                </div>
+            </div>
         </div>
     {% endblock %}
-    <script src="https://d3js.org/d3.v5.min.js"></script>
-    <!-- .appendでdataの個数分のDOM要素をHTMLに動的に挿入することができる -->
     <script>
-        var p = d3.select("body")
-          .selectAll('p')
-          .data([4,8,15,16,23,42])
-            .text(function(d) { return d; });
+        var options = {                                //◆オプション
+            responsive: true,                     //グラフ自動設定
+            legend: {                             //凡例設定
+                display: true                    //表示設定
+           },
+            title: {                              //タイトル設定
+                display: false,                    //表示設定
+                fontSize: 18,                     //フォントサイズ
+                text: '売上高推移'                //ラベル
+            },
+            scales: {                             //軸設定
+                yAxes: [{                         //y軸設定
+                    display: true,                //表示設定
+                    scaleLabel: {                 //軸ラベル設定
+                       display: false,             //表示設定
+                       labelString: '縦軸ラベル', //ラベル
+                       fontSize: 18               //フォントサイズ
+                    },
+                    /*
+                    ticks: {                      //最大値最小値設定
+                        min: 0,                   //最小値
+                        max: 30,                  //最大値
+                        fontSize: 9,              //フォントサイズ
+                        stepSize: 5               //軸間隔
+                    },
+                    */
+                }],
+                xAxes: [{                         //x軸設定
+                    display: true,                //表示設定
+                    //barPercentage: 0.4,           //棒グラフ幅
+                    //categoryPercentage: 0.4,      //棒グラフ幅
+                    scaleLabel: {                 //軸ラベル設定
+                       display: false,             //表示設定
+                       labelString: '横軸ラベル',  //ラベル
+                       fontSize: 9               //フォントサイズ
+                    },
+                    ticks: {
+                        maxRotation: 90,
+                        minRotation: 90,
+                        fontSize: 12             //フォントサイズ
+                    },
+                }],
+            },
+            layout: {                             //レイアウト
+                padding: {                          //余白設定
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
+                }
+            }
+        };
+        var ctx = document.getElementById("sales_chart").getContext('2d');
+        var salesChart = new Chart(ctx, {
+            type: 'bar', //◆棒グラフ
+            data: {      //◆データ
+                labels: [{% for item in chart_data["labels"] %}
+                            "{{item}}",
+                        {% endfor %}],
+                datasets: [
+                    {
+                        label: '売上高',
+                        data: [{{ chart_data["sales_data"] }}],
+                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                        borderColor: 'rgba(0, 0, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: options
+        });
 
-        // Enter
-        p.enter().append("p")
-          .text(function(d) { return d;});
+        ctx = document.getElementById("operating_income_chart").getContext('2d');
+        var operatingIncomeChart = new Chart(ctx, {
+            type: 'bar', //◆棒グラフ
+            data: {      //◆データ
+                labels: [{% for item in chart_data["labels"] %}
+                            "{{item}}",
+                        {% endfor %}],
+                datasets: [
+                    {
+                        label: '営業利益',
+                        data: [{{ chart_data["operating_income_data"] }}],
+                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                        borderColor: 'rgba(0, 0, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: options
+        });
 
-        // Exit
-        p.exit().remove()
+        ctx = document.getElementById("ordinal_income_chart").getContext('2d');
+        var operatingIncomeChart = new Chart(ctx, {
+            type: 'bar', //◆棒グラフ
+            data: {      //◆データ
+                labels: [{% for item in chart_data["labels"] %}
+                            "{{item}}",
+                        {% endfor %}],
+                datasets: [
+                    {
+                        label: '経常利益',
+                        data: [{{ chart_data["ordinal_income_data"] }}],
+                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                        borderColor: 'rgba(0, 0, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: options
+        });
 
+        ctx = document.getElementById("net_income_chart").getContext('2d');
+        var operatingIncomeChart = new Chart(ctx, {
+            type: 'bar', //◆棒グラフ
+            data: {      //◆データ
+                labels: [{% for item in chart_data["labels"] %}
+                            "{{item}}",
+                        {% endfor %}],
+                datasets: [
+                    {
+                        label: '純利益',
+                        data: [{{ chart_data["net_income_data"] }}],
+                        backgroundColor: 'rgba(0, 0, 255, 0.2)',
+                        borderColor: 'rgba(0, 0, 255, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: options
+        });
     </script>
+
+
 </html>

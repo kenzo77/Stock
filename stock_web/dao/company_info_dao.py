@@ -10,8 +10,10 @@ def get_company_info(symbol):
 
 # 会社の業績を取得します
 def get_stock_performance(symbol):
-    sql = "select * From MST_PERFORMANCE where Stock_code = '{0}-T' and term not like '%Q%' and " \
-          "(term like '%会社実績%' or term like '%会社予想%') order by term".format(symbol)
+    sql = "select distinct TERM, SALES / 1000000 as SALES, OPERATING_INCOME / 1000000 as OPERATING_INCOME, " \
+          " ORDINARY_INCOME / 1000000 as ORDINARY_INCOME, NET_INCOME / 1000000  as NET_INCOME" \
+          " From MST_PERFORMANCE where Stock_code = '{0}-T' and term not like '%Q%' and " \
+          "(term like '%会社実績%' or term like '%会社予想%') order by term, announce_date".format(symbol)
     result = db.engine.execute(sql)
     return common_dao.convert_json_list(result)
 
