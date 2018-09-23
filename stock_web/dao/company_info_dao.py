@@ -22,7 +22,7 @@ def get_stock_performance(symbol):
 def get_ohlc_data(symbol):
     sql = "SELECT * FROM (SELECT STOCK_DATE, START_PRICE, HIGH_PRICE, LOW_PRICE, END_PRICE, VOLUME " \
           "FROM DATA_STOCKS WHERE STOCK_CODE = '{0}-T' ORDER BY STOCK_DATE desc limit 60) " \
-          "ORDER BY STOCK_DATE".format(symbol)
+          "ORDER BY STOCK_DATE desc".format(symbol)
     result = db.engine.execute(sql)
     return common_dao.convert_json_list(result)
 
