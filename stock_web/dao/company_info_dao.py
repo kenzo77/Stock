@@ -17,5 +17,15 @@ def get_stock_performance(symbol):
     result = db.engine.execute(sql)
     return common_dao.convert_json_list(result)
 
+
+# 日足データを取得します
+def get_ohlc_data(symbol):
+    sql = "SELECT * FROM (SELECT STOCK_DATE, START_PRICE, HIGH_PRICE, LOW_PRICE, END_PRICE, VOLUME " \
+          "FROM DATA_STOCKS WHERE STOCK_CODE = '{0}-T' ORDER BY STOCK_DATE desc limit 60) " \
+          "ORDER BY STOCK_DATE".format(symbol)
+    result = db.engine.execute(sql)
+    return common_dao.convert_json_list(result)
+
+
 if __name__ == '__main__':
     print(get_company_info('1301'))
