@@ -6,329 +6,301 @@
     </head>
     {% block body %}
         {% include 'common/nav.html' %}
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert alert-info" role="alert">
-                    {% for message in messages %}
-                        {{ message }}
-                        <br>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-        <div class="container mt-3">
-            <section class="section section-default symbol_search">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="page-header">
-                            <h2>会社情報</h2>
+        {% if company_info is defined %}
+            <div class="container mt-3">
+                <section class="section section-default symbol_search">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="page-header">
+                                <h2>会社情報</h2>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="page-header">
-                            <form action="{{ url_for('search_symbol') }}" method="post" class="form-inline search_symbol">
-                                <input type="text" class="form-control ml-2 col-3 px-1" id="symbol" name="symbol" placeholder="銘柄コード" value="6501">
-                                <button type="submit" class="btn btn-secondary ml-2" id="search_symbol">検　索</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            </section>
-            <div class="bs-component">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#company_info">会社情報</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#chart">チャート</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#finance_result">業績</a>
-                    </li>
-                </ul>
-            </div>
-            <section class="section section-default mt-4" id="company_info">
-                <div class="row small">
-                    <div class="col-sm-4">
-                        <div class="card text-white bg-dark">
-                            <div class="card-header"><h4>6501 日立建機</h4></div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-3">株　　価</div>
-                                    <div class="col-sm-3">6501</div>
-                                    <div class="col-sm-3">市場名</div>
-                                    <div class="col-sm-3">マザーズ</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">時価総額</div>
-                                    <div class="col-sm-3">6501</div>
-                                    <div class="col-sm-3">25MA</div>
-                                    <div class="col-sm-3">7,625</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">予想PER</div>
-                                    <div class="col-sm-3">15.01</div>
-                                    <div class="col-sm-3">25MA</div>
-                                    <div class="col-sm-3">7,625</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-3">PBR</div>
-                                    <div class="col-sm-3">0.53</div>
-                                    <div class="col-sm-3">時価総額</div>
-                                    <div class="col-sm-3">7,625</div>
-                                </div>
+                        <div class="col-lg-6">
+                            <div class="page-header">
+                                <form action="{{ url_for('search_symbol') }}" method="post" class="form-inline search_symbol">
+                                    <input type="text" class="form-control ml-2 col-3 px-1" id="symbol" name="symbol" placeholder="銘柄コード">
+                                    <button type="submit" class="btn btn-secondary ml-2" id="search_symbol">検　索</button>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-8">
-                        <div class="row">
-                            <div class="col-sm-2">銘柄</div>
-                            <div class="col-sm-2">6501</div>
-                            <div class="col-sm-2 border-left">時価総額</div>
-                            <div class="col-sm-2">7,625</div>
-                            <div class="col-sm-2 border-left">外国保有比</div>
-                            <div class="col-sm-2">16.2%</div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-sm-2">銘柄名</div>
-                            <div class="col-sm-2">日立建機</div>
-                            <div class="col-sm-2 border-left">資本比率</div>
-                            <div class="col-sm-2">40.40%</div>
-                            <div class="col-sm-2 border-left">投信保有比</div>
-                            <div class="col-sm-2">13.7%</div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-sm-2">業種</div>
-                            <div class="col-sm-2">機械</div>
-                            <div class="col-sm-2 border-left">利益剰余金</div>
-                            <div class="col-sm-2">262,098</div>
-                            <div class="col-sm-2 border-left">浮動株</div>
-                            <div class="col-sm-2">5.5%</div>
-                        </div>
-                        <div class="row mt-1">
-                            <div class="col-sm-2">上場日</div>
-                            <div class="col-sm-2">1981/12/17</div>
-                            <div class="col-sm-2 border-left">有利子負債</div>
-                            <div class="col-sm-2">262,011</div>
-                            <div class="col-sm-2 border-left">特定株</div>
-                            <div class="col-sm-2">71.1%</div>
-                        </div>
-                        <div class="row mt-2 mb-2">
-                            <div class="col-sm-12 border-top"></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-2">特色</div>
-                            <div class="col-sm-10">油圧ショベル軸に建機国内２位、世界３位圏。鉱山機械も展開。日立製作所と連携強化</div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-sm-2">連結事業</div>
-                            <div class="col-sm-10">建設機械ビジネス99(3)、ソリューションビジネス1(18)【海外】70 <17・3></div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-sm-2">比較会社</div>
-                            <div class="col-sm-10">6301 コマツ,6390 加藤製作所,6432 竹内製作所</div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-sm-2">従業員</div>
-                            <div class="col-sm-10"><17.12>連23,962名 単4,124名(37.4歳)[年]620万円</div>
+                    <hr>
+                </section>
+                <div class="bs-component">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#company_info">会社情報</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#chart">チャート</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#finance_result">業績</a>
+                        </li>
+                    </ul>
+                </div>
+                <section class="section section-default mt-4" id="company_info">
+                    <h4>{{company_info["STOCK_CODE"]}} {{company_info["STOCK_NAME"]}}  {{company_info["LISTED_PLACE"]}}</h4>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-2">業種</div>
+                                <div class="col-sm-2">{{company_info["BUSINESS_TYPE_NAME"]}}</div>
+                                <div class="col-sm-2">予想PER</div>
+                                <div class="col-sm-2">{{company_info["PER"]}}</div>
+                                <div class="col-sm-4">{{company_info["STOCK_FOREIGN_RATIO"]}}</div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-sm-2">時価総額</div>
+                                <div class="col-sm-2">{{company_info["TOTAL_MARKET_VALUE"]}}億</div>
+                                <div class="col-sm-2">実績PBR</div>
+                                <div class="col-sm-2">{{company_info["PBR"]}}</div>
+                                <div class="col-sm-4">{{company_info["STOCK_INVESTMENT_RATIO"]}}</div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-sm-2">配当利率</div>
+                                <div class="col-sm-2">{{company_info["DIVIDEND_RATE"]}}</div>
+                                <div class="col-sm-2">自己資本比率</div>
+                                <div class="col-sm-2">{{company_info["EQUITY_RATIO"]}}%</div>
+                                <div class="col-sm-4">{{company_info["FREE_FLOATWEIGHT"]}}</div>
+                            </div>
+                            <div class="row mt-1">
+                                <div class="col-sm-2">優待利率</div>
+                                <div class="col-sm-2">{{company_info["YUTAI_RATIO"]}}%</div>
+                                <div class="col-sm-2">有利子負債</div>
+                                <div class="col-sm-2">{{company_info["LIABILITIES_WITH_INTEREST"]}}</div>
+                                <div class="col-sm-4">{{company_info["SPECIFIC_SHAREHOLDER_RATIO"]}}</div>
+                            </div>
+                            <div class="row mt-2 mb-2">
+                                <div class="col-sm-12 border-top"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-1">特色</div>
+                                <div class="col-sm-11">{{company_info["CHARACTERISTIC"]}}</div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-1">解説</div>
+                                <div class="col-sm-11" >{{company_info["COMMENTARY1"]}}</div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-1">今後</div>
+                                <div class="col-sm-11" >{{company_info["COMMENTARY2"]}}</div>
+                            </div>
+                            <hr>
+                            <div class="row mt-2">
+                                <div class="col-sm-1">連結事業</div>
+                                <div class="col-sm-11">{{company_info["CONSOLIDATED_BUSINESS"]}}</div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-1">比較会社</div>
+                                <div class="col-sm-10">{{company_info["COMPETITORS"]}}</div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-1">主要株主</div>
+                                <div class="col-sm-11">{{company_info["PRINCIPAL_SHAREHOLDER"]}}</div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-1">役員</div>
+                                <div class="col-sm-11">{{company_info["OFFICER"]}}</div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-sm-1">従業員</div>
+                                <div class="col-sm-11">{{company_info["EMPLOYEE"]}}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr>
-                <div class="row mt-1 small">
-                    <div class="col-sm-1">会社説明</div>
-                    <div class="col-sm-11" >
-                            日立建機グループは、同社、親会社、連結子会社85社及び関連会社17社で構成される。<br>【事業内容】同社は油圧ショベル・超大型油圧ショベル・ホイールローダー等の製造・販売及びこれに関連する部品サービスの販売により建設機械に関連するレンタルライフサイクルの提供を主たる目的とした建設機械事業、並びに建設機械事業に含まれない部品の製造・販売及びサービス販売を主たる目的としたソリューション事業の2つの報告セグメントを有する。
+                    <hr>
+                    <div class="row mt-1">
+                        <div class="col-sm-1">会社説明</div>
+                        <div class="col-sm-11" >{{company_info["COMPANY_PROFILE"]}}</div>
                     </div>
-                </div>
-                <hr>
-                <div class="row small">
-                    <div class="col-sm-1">解説</div>
-                    <div class="col-sm-11" >【独自増額】建機は想定超す中国はじめ回復基調。米・豪は鉱山向け部品・サービスの買収２社も通期寄与。クレーン非連結化や開発費増こなす。１ドル106円など為替前提もなお保守的。前号より増益幅拡大。</div>
-                </div>
-                <div class="row small mt-1">
-                    <div class="col-sm-1">今後</div>
-                    <div class="col-sm-11" >【重　点】部品・サービス事業の19年度売上比率５割（今期45％）計画。採算悪い100ｔ未満の鉱山用ダンプ生産を当面停止。ＩＣＴ施工のクラウド事業を９月開始へ。</div>
-                </div>
-            </section>
+                    <hr>
+                </section>
 
-            <br>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div id="chart_div"></div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="chart_div"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <canvas id="sales_chart"></canvas>
+                    </div>
+                    <div class="col-sm-6">
+                        <canvas id="operating_income_chart"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <canvas id="ordinal_income_chart"></canvas>
+                    </div>
+                    <div class="col-sm-6">
+                        <canvas id="net_income_chart"></canvas>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <canvas id="sales_chart"></canvas>
-                </div>
-                <div class="col-sm-6">
-                    <canvas id="operating_income_chart"></canvas>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <canvas id="ordinal_income_chart"></canvas>
-                </div>
-                <div class="col-sm-6">
-                    <canvas id="net_income_chart"></canvas>
-                </div>
-            </div>
-        </div>
-    {% endblock %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-    <script>
-        var title = "";
-        var options = {                           //◆オプション
-            responsive: true,                     //グラフ自動設定
-            legend: {                             //凡例設定
-                display: true                     //表示設定
-           },
-            scales: {                             //軸設定
-                yAxes: [{                         //y軸設定
-                    display: true,                //表示設定
-                    scaleLabel: {                 //軸ラベル設定
-                       display: false,            //表示設定
-                       labelString: '縦軸ラベル', //ラベル
-                       fontSize: 18               //フォントサイズ
+
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+            <script>
+                var title = "";
+                var options = {                           //◆オプション
+                    responsive: true,                     //グラフ自動設定
+                    legend: {                             //凡例設定
+                        display: true                     //表示設定
+                   },
+                    scales: {                             //軸設定
+                        yAxes: [{                         //y軸設定
+                            display: true,                //表示設定
+                            scaleLabel: {                 //軸ラベル設定
+                               display: false,            //表示設定
+                               labelString: '縦軸ラベル', //ラベル
+                               fontSize: 18               //フォントサイズ
+                            },
+                        }],
+                        xAxes: [{                         //x軸設定
+                            display: true,                //表示設定
+                            ticks: {
+                                maxRotation: 90,          //X軸ラベル角度最大値
+                                minRotation: 90,          //X軸ラベル角度最小値
+                                fontSize: 12              //フォントサイズ
+                            },
+                        }],
                     },
-                }],
-                xAxes: [{                         //x軸設定
-                    display: true,                //表示設定
-                    ticks: {
-                        maxRotation: 90,          //X軸ラベル角度最大値
-                        minRotation: 90,          //X軸ラベル角度最小値
-                        fontSize: 12              //フォントサイズ
+                    layout: {                             //レイアウト
+                        padding: {                        //余白設定
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0
+                        }
+                    }
+                };
+                var labels = [{% for item in chart_data["labels"] %} "{{item}}", {% endfor %}];
+                var backgroundColor = [{% for item in chart_data["background_color_data"] %} "{{item}}", {% endfor %}];
+                var borderColor = [{% for item in chart_data["border_color_data"] %} "{{item}}", {% endfor %}];
+                var ctx = document.getElementById("sales_chart").getContext('2d');
+                var salesChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '売上高',
+                                data: [{{ chart_data["sales_data"] }}],
+                                backgroundColor: backgroundColor,
+                                borderColor: borderColor,
+                                borderWidth: 1
+                            }
+                        ]
                     },
-                }],
-            },
-            layout: {                             //レイアウト
-                padding: {                        //余白設定
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
+                    options: options
+                });
+
+                ctx = document.getElementById("operating_income_chart").getContext('2d');
+                var operatingIncomeChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '営業利益',
+                                data: [{{ chart_data["operating_income_data"] }}],
+                                backgroundColor: backgroundColor,
+                                borderColor: borderColor,
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: options
+                });
+
+                ctx = document.getElementById("ordinal_income_chart").getContext('2d');
+                var operatingIncomeChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '経常利益',
+                                data: [{{ chart_data["ordinal_income_data"] }}],
+                                backgroundColor: backgroundColor,
+                                borderColor: borderColor,
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: options
+                });
+
+                ctx = document.getElementById("net_income_chart").getContext('2d');
+                var operatingIncomeChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: '純利益',
+                                data: [{{ chart_data["net_income_data"] }}],
+                                backgroundColor: backgroundColor,
+                                borderColor: borderColor,
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: options
+                });
+            </script>
+            <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+            <script type="text/javascript">
+
+                // ライブラリのロード
+                // name:visualization(可視化),version:バージョン(1.1),packages:パッケージ(corechart)
+                google.load('visualization', '1', {'packages':['corechart']});
+
+                // グラフを描画する為のコールバック関数を指定
+                google.setOnLoadCallback(drawChart);
+
+                // グラフの描画
+                function drawChart() {
+
+                // メソッドからデータの生成
+                var data = new google.visualization.arrayToDataTable([
+                    {% for item in chart_data["ohlc_data"] %}
+                        // データの順 安値,終値,始値,高値
+                        ['{{item["STOCK_DATE"]}}',{{item["LOW_PRICE"]}},{{item["END_PRICE"]}},{{item["START_PRICE"]}},{{item["HIGH_PRICE"]}}],
+                    {% endfor %}
+
+                ], true);
+
+                // オプションの設定
+                var options = {
+                    height: 400,
+                    colors:['#ff0000','#00ff00'],
+                    legend:'none',
+                    hAxis: {
+                        direction: -1,
+                        slantedText: true,
+                        slantedTextAngle: 90 // here you can even use 180
+                    },
+                    chartArea:{left:50,right:25, top:25, bottom:100, width:"100%",height:"80%"}
+                };
+
+                // 指定されたIDの要素にローソク足を作成
+                var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+                // グラフの描画
+                chart.draw(data, options);
                 }
-            }
-        };
-        var labels = [{% for item in chart_data["labels"] %} "{{item}}", {% endfor %}];
-        var backgroundColor = [{% for item in chart_data["background_color_data"] %} "{{item}}", {% endfor %}];
-        var borderColor = [{% for item in chart_data["border_color_data"] %} "{{item}}", {% endfor %}];
-        var ctx = document.getElementById("sales_chart").getContext('2d');
-        var salesChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: '売上高',
-                        data: [{{ chart_data["sales_data"] }}],
-                        backgroundColor: backgroundColor,
-                        borderColor: borderColor,
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: options
-        });
 
-        ctx = document.getElementById("operating_income_chart").getContext('2d');
-        var operatingIncomeChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: '営業利益',
-                        data: [{{ chart_data["operating_income_data"] }}],
-                        backgroundColor: backgroundColor,
-                        borderColor: borderColor,
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: options
-        });
-
-        ctx = document.getElementById("ordinal_income_chart").getContext('2d');
-        var operatingIncomeChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: '経常利益',
-                        data: [{{ chart_data["ordinal_income_data"] }}],
-                        backgroundColor: backgroundColor,
-                        borderColor: borderColor,
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: options
-        });
-
-        ctx = document.getElementById("net_income_chart").getContext('2d');
-        var operatingIncomeChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [
-                    {
-                        label: '純利益',
-                        data: [{{ chart_data["net_income_data"] }}],
-                        backgroundColor: backgroundColor,
-                        borderColor: borderColor,
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: options
-        });
-    </script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-
-        // ライブラリのロード
-        // name:visualization(可視化),version:バージョン(1.1),packages:パッケージ(corechart)
-        google.load('visualization', '1', {'packages':['corechart']});
-
-        // グラフを描画する為のコールバック関数を指定
-        google.setOnLoadCallback(drawChart);
-
-        // グラフの描画
-        function drawChart() {
-
-        // メソッドからデータの生成
-        var data = new google.visualization.arrayToDataTable([
-            {% for item in chart_data["ohlc_data"] %}
-                // データの順 安値,終値,始値,高値
-                ['{{item["STOCK_DATE"]}}',{{item["LOW_PRICE"]}},{{item["END_PRICE"]}},{{item["START_PRICE"]}},{{item["HIGH_PRICE"]}}],
-            {% endfor %}
-
-        ], true);
-
-        // オプションの設定
-        var options = {
-            height: 400,
-            colors:['#ff0000','#00ff00'],
-            legend:'none',
-            hAxis: {
-                direction: -1,
-                slantedText: true,
-                slantedTextAngle: 90 // here you can even use 180
-            },
-            chartArea:{left:50,right:25, top:25, bottom:100, width:"100%",height:"80%"}
-        };
-
-        // 指定されたIDの要素にローソク足を作成
-        var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
-
-        // グラフの描画
-        chart.draw(data, options);
-        }
-
-    </script>
+            </script>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                指定の会社コードは見つかりませんでした。
+            </div>
+        {% endif %}
+    {% endblock %}
 </html>

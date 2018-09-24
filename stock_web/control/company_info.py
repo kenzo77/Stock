@@ -19,6 +19,5 @@ def search_symbol():
     else:
         symbol = request.values.get("symbol")
 
-    chart_data = company_info_service.get_company_info(symbol)
-    print(company_info)
-    return render_template('company_info.html', chart_data=chart_data)
+    company_info, chart_data = company_info_service.get_company_info(symbol)
+    return render_template('company_info.html', company_info=company_info, chart_data=chart_data)

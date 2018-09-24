@@ -3,6 +3,7 @@ from stock_web.dao import company_info_dao as dao
 
 # 会社情報を取得します
 def get_company_info(symbol):
+    company_info = dao.get_company_info(symbol)
     result = dao.get_stock_performance(symbol)
     #Chart表示用に編集します
     labels = []
@@ -51,7 +52,7 @@ def get_company_info(symbol):
         "ordinal_income_data": ",".join(map(str, ordinal_income_data)),
         "net_income_data": ",".join(map(str, net_income_data))
     }
-    return chart_data
+    return company_info, chart_data
 
 
 if __name__ == '__main__':
