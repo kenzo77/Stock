@@ -16,7 +16,7 @@
                 </div>
             {% endif %}
         {% endwith %}
-        <div class="container-fluid mt-3">
+        <div class="container" id="body-contents">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="page-header">
@@ -27,15 +27,15 @@
             <section class="section section-default search_condition">
                 <form action="{{ url_for('search_company') }}" method="post">
                     <div class="row">
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <div class="col-sm">銘柄コード</div>
                             <div class="col-sm"><input type="text" name="symbol" value="{{val['symbol']}}" placeholder="完全一致" /></div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <div class="col-sm">銘柄名</div>
                             <div class="col-sm"><input type="text" name="symbol_name" value="{{val['symbol_name']}}" placeholder="部分一致" /></div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <div class="col-sm">キーワード</div>
                             <div class="col-sm"><input type="text" name="keyword" value="{{val['keyword']}}" placeholder="部分一致" /></div>
                         </div>
