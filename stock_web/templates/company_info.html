@@ -268,24 +268,49 @@
                 function drawChart() {
 
                 // メソッドからデータの生成
-                var data = new google.visualization.arrayToDataTable([
-                    {% for item in chart_data["ohlc_data"] %}
-                        // データの順 安値,終値,始値,高値
-                        ['{{item["STOCK_DATE"]}}',{{item["LOW_PRICE"]}},{{item["END_PRICE"]}},{{item["START_PRICE"]}},{{item["HIGH_PRICE"]}}],
-                    {% endfor %}
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', '日付');
+                data.addColumn('number', '安値');
+                data.addColumn('number', '終値');
+                data.addColumn('number', '始値');
+                data.addColumn('number', '高値');
+                data.addColumn({type: 'string', role: 'tooltip', 'p': {'html': true}});
 
-                ], true);
+                // データの順 安値,終値,始値,高値
+                var ohlc_data = [
+                    {% for item in chart_data["ohlc_data"] %}
+                        [
+                            '{{item["STOCK_DATE"]}}'
+                            ,{{item["LOW_PRICE"]}}
+                            ,{{item["END_PRICE"]}}
+                            ,{{item["START_PRICE"]}}
+                            ,{{item["HIGH_PRICE"]}}
+                            ,'<div style="width:80px; background-color:#292929; color:white; border-radius: 5px; padding-left:5px;"><strong>{{item["STOCK_DATE"]}}</strong><br>始値: <strong>{{item["START_PRICE"]}} </strong><br>高値: <strong>{{item["HIGH_PRICE"]}} </strong><br>安値: <strong>{{item["LOW_PRICE"]}} </strong><br>終値: <strong>{{item["END_PRICE"]}} </strong>'
+                        ],
+                    {% endfor %}
+                ];
+                data.addRows(ohlc_data);
+
+                var formatter = new google.visualization.NumberFormat({
+                    pattern: '#,###'
+                });
+                formatter.format(data, 1);
 
                 // オプションの設定
                 var options = {
                     height: 400,
-                    colors:['#ff0000','#00ff00'],
+                    candlestick: {
+                        fallingColor: { strokeWidth: 0, fill: '#a52714' }, // red
+                        risingColor: { strokeWidth: 0, fill: '#0f9d58' }   // green
+                    },
+                    colors: ['black'],
                     legend:'none',
                     hAxis: {
                         direction: -1,
                         slantedText: true,
-                        slantedTextAngle: 90 // here you can even use 180
+                        slantedTextAngle: 90
                     },
+                    tooltip: {isHtml: 'true'},
                     chartArea:{left:50,right:25, top:25, bottom:100, width:"100%",height:"80%"}
                 };
 
