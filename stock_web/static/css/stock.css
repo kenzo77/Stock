@@ -7,6 +7,19 @@
     height: 60px;
 }
 
+#page_menu {
+    height: 40px;
+    padding-left: 0;
+    font-size: 1.2rem;
+}
+
+#page_menu .nav-item {
+    text-align: center;
+}
 #body-contents {
-    margin-top:  75px;
+    margin-top: 75px;
+}
+
+#input_symbol {
+    width: 400px;
 }

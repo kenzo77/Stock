@@ -8,36 +8,23 @@
         {% include 'common/nav.html' %}
         {% if company_info is defined %}
             <div class="container" id="body-contents">
-                <section class="section section-default symbol_search">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="page-header">
-                                <h2>会社情報</h2>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="page-header">
-                                <form action="{{ url_for('search_symbol') }}" method="post" class="form-inline search_symbol">
-                                    <input type="text" class="form-control ml-2 col-3 px-1" id="symbol" name="symbol" placeholder="銘柄コード">
-                                    <button type="submit" class="btn btn-secondary ml-2" id="search_symbol">検　索</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                </section>
+                {% include 'common/page_title.html' %}
                 <div class="bs-component">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#company_info">会社情報</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#chart">チャート</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#finance_result">業績</a>
-                        </li>
-                    </ul>
+                    <nav class="navbar navbar-expand-sm navbar-light" id="page_menu">
+                        <div class="collapse navbar-collapse">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#company_info">会社情報</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#chart">チャート</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#finance_result">業績</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
                 <section class="section section-default mt-4" id="company_info">
                     <h4>{{company_info["STOCK_CODE"]}} {{company_info["STOCK_NAME"]}}  {{company_info["LISTED_PLACE"]}}</h4>

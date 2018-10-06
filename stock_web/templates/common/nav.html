@@ -4,7 +4,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarColor02">
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 {% if not session.logged_in %}
                     <li class="nav-item">
@@ -15,10 +15,10 @@
                         <a class="nav-link" href="/search_company_init">会社検索</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">チャート</a>
+                        <a class="nav-link" href="/announce_financial">決算発表</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">業績</a>
+                        <a class="nav-link" href="/yutai">優待情報</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">時系列</a>
@@ -28,6 +28,12 @@
                     </li>
                 {% endif %}
             </ul>
+            <div class="page-header">
+                <form action="{{ url_for('search_symbol') }}" method="post" class="form-inline search_symbol">
+                    <input type="text" class="form-control ml-2 col-3 px-1" id="input_symbol" name="symbol" placeholder="銘柄コード">
+                    <button type="submit" class="btn btn-secondary ml-2" id="search_symbol">検　索</button>
+                </form>
+            </div>
         </div>
     </nav>
 </header>

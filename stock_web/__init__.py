@@ -7,3 +7,5 @@ db = SQLAlchemy(app)
 import stock_web.views
 import stock_web.control.search_company
 import stock_web.control.company_info
+import stock_web.control.announce_financial
+import stock_web.control.yutai

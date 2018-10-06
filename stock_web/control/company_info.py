@@ -20,4 +20,4 @@ def search_symbol():
         symbol = request.values.get("symbol")
 
     company_info, chart_data = company_info_service.get_company_info(symbol)
-    return render_template('company_info.html', company_info=company_info, chart_data=chart_data)
+    return render_template('company_info.html', company_info=company_info, chart_data=chart_data, title="会社情報")

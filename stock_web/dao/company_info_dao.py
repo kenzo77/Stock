@@ -12,7 +12,7 @@ def get_company_info(symbol):
     sql += "    , a.LIESTED_DATE "
     sql += "    , a.LISTED_PLACE "
     sql += "    , a.FISCAL_PERIOD "
-    sql += "    , ROUND(cast(a.SHARED_OUTSTANDING * e.end_price as  float) / 100000000, 0) as TOTAL_MARKET_VALUE "
+    sql += "    , ROUND(cast(a.SHARED_OUTSTANDING * e.end_price as decimal) / 100000000) as TOTAL_MARKET_VALUE "
     sql += "    , ROUND(cast(e.end_price as float) / cast(g.net_income / a.SHARED_OUTSTANDING as float), 3) as PER "
     sql += "    , ROUND(cast(e.end_price as float) / cast(a.BPS as float), 3) as PBR"
     sql += "    , b2.CHARACTERISTIC "

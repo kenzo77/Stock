@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+        <title>優待情報</title>
+        {% include 'common/header.html' %}
+    </head>
+    {% block body %}
+        {% include 'common/nav.html' %}
+        <div class="container" id="body-contents">
+            {% include 'common/page_title.html' %}
+            <div class="bs-component">
+                <nav class="navbar navbar-expand-sm navbar-light" id="page_menu">
+                    <div class="collapse navbar-collapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item {% if month == 1 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=1" >1月</a>
+                            </li>
+                            <li class="nav-item {% if month == 2 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=2">2月</a>
+                            </li>
+                            <li class="nav-item {% if month == 3 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=3">3月</a>
+                            </li>
+                            <li class="nav-item {% if month == 4 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=4">4月</a>
+                            </li>
+                            <li class="nav-item {% if month == 5 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=5">5月</a>
+                            </li>
+                            <li class="nav-item {% if month == 6 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=6">6月</a>
+                            </li>
+                            <li class="nav-item {% if month == 7 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=7">7月</a>
+                            </li>
+                            <li class="nav-item {% if month == 8 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=8">8月</a>
+                            </li>
+                            <li class="nav-item {% if month == 9 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=9">9月</a>
+                            </li>
+                            <li class="nav-item {% if month == 10 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=10">10月</a>
+                            </li>
+                            <li class="nav-item {% if month == 11 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=11">11月</a>
+                            </li>
+                            <li class="nav-item {% if month == 12 %} active{% endif %}">
+                                <a class="nav-link" href="/yutai?month=12">12月</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <section class="section section-default search_result">
+                    <table class="table table-hover mt-3">
+                        <tr>
+                            <th>銘柄</th><th>銘柄名</th><th>優待内容</th><th>最低購入</th><th>優待価値</th><th>優待利率</th><th>配当利率</th><th>合計利率</th>
+                        </tr>
+                        {% if result_list is defined %}
+                            {% for result in result_list %}
+                                <tr>
+                                    <td>{{result['STOCK_CODE']}}</td>
+                                    <td><a href="/search_symbol?symbol={{result['STOCK_CODE']}}">{{result['STOCK_NAME']}}</a></td>
+                                    <td>{{result['CONTENTS']}}</td>
+                                    <td>{{result['MIN_VALUE_PRICE']}}円</td>
+                                    <td>{{result['DIVIDENDS']}}円</td>
+                                    <td>{{result['YUTAI_RATE']}}%</td>
+                                    <td>{{result['DIVIDEND_RATE']}}%</td>
+                                    <td>{{result['SUM_RATE']}}%</td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                    {% if result_list is not defined %}
+                        <p>データが存在しません</p>
+                    {% endif %}
+
+            </section>
+        </div>
+    {% endblock %}
+
+</html>
